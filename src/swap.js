@@ -16,7 +16,6 @@ const router = new w3.eth.Contract(routerAbi, routerAddress);
 async function run() {
   let nonce = await w3.eth.getTransactionCount(account.address);
   let decimals = await token.methods.decimals().call();
-  console.log(amountOutMin);
   amountOutMin = new BigNumber(amountOutMin)
     .multipliedBy(10 ** decimals)
     .toString(10);
@@ -26,8 +25,7 @@ async function run() {
     .multipliedBy(1.1)
     .toString(10);
   let tx_params = {
-    //from: account.address,
-    from: '0x1B7Ed58eC68Fc4c875becf14c215C4e23468e121',
+    from: account.address,
     to: routerAddress,
     value: amountBnbIn,
     nonce: nonce,
